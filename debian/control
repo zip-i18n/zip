@@ -1,7 +1,8 @@
 Source: zip
 Section: utils
 Priority: optional
-Maintainer: Santiago Vila <sanvila@debian.org>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Santiago Vila <sanvila@debian.org>
 Standards-Version: 3.9.2
 Build-Depends: libbz2-dev
 Homepage: http://www.info-zip.org/Zip.html

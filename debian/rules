@@ -7,17 +7,20 @@ CC = gcc
 CFLAGS := `dpkg-buildflags --get CFLAGS` -Wall -I. -DUNIX
 LDFLAGS := `dpkg-buildflags --get LDFLAGS`
 CPPFLAGS := `dpkg-buildflags --get CPPFLAGS`
-STRIP = true
+STRIP = strip
 
 DEB_BUILD_GNU_TYPE := $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 DEB_HOST_GNU_TYPE := $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
 ifneq ($(DEB_HOST_GNU_TYPE),$(DEB_BUILD_GNU_TYPE))
   CC=$(DEB_HOST_GNU_TYPE)-gcc
+  STRIP=$(DEB_HOST_GNU_TYPE)-strip
 endif
 
 ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-  STRIP = strip --remove-section=.comment --remove-section=.note
+  STRIP += --remove-section=.comment --remove-section=.note
+else
+  STRIP = true
 endif
 
 build:
