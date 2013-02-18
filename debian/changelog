@@ -1,3 +1,18 @@
+zip (3.0-6ubuntu1i18n2) oneiric; urgency=low
+
+  * Apply natspec+asdos patch from http://www.opennet.ru/tips/info/2494.shtml
+    to support automatically encoding file names from current locale to a
+    Windows encoding and create archives with DOS-compatible file names by
+    default. This is to complement changes to unzip utility.
+
+ -- Dmitry Frolov (Launchpad.net) <dmitry.frolov@gmail.com>  Mon, 18 Feb 2013 15:16:26 +0700
+
+zip (3.0-6ubuntu1) raring; urgency=low
+
+  * Fix cross-builds by calling the cross-strip when required.
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Fri, 07 Dec 2012 16:35:03 -0700
+
 zip (3.0-6) unstable; urgency=low
 
   * Added Multi-Arch: foreign.
