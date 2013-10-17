@@ -1,4 +1,4 @@
-zip (3.0-6ubuntu1i18n2) oneiric; urgency=low
+zip (3.0-7i18n2) saucy; urgency=low
 
   * Apply natspec+asdos patch from http://www.opennet.ru/tips/info/2494.shtml
     to support automatically encoding file names from current locale to a
@@ -6,6 +6,12 @@ zip (3.0-6ubuntu1i18n2) oneiric; urgency=low
     default. This is to complement changes to unzip utility.
 
  -- Dmitry Frolov (Launchpad.net) <dmitry.frolov@gmail.com>  Mon, 18 Feb 2013 15:16:26 +0700
+
+zip (3.0-7) unstable; urgency=low
+
+  * Use the right strip command when cross-building. Closes: #695429.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 24 Feb 2013 17:12:14 +0100
 
 zip (3.0-6ubuntu1) raring; urgency=low
 
