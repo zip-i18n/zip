@@ -1,6 +1,7 @@
-diff -pur zip30orig/fileio.c zip30/fileio.c
---- zip30orig/fileio.c	2008-05-29 04:13:24.000000000 +0400
-+++ zip30/fileio.c	2010-11-29 10:39:54.000000000 +0300
+diff --git a/fileio.c b/fileio.c
+index 1847e62..f0d0a2f 100644
+--- a/fileio.c
++++ b/fileio.c
 @@ -929,7 +929,7 @@ int newname(name, isdir, casesensitive)
    }
    if ((zname = in2ex(iname)) == NULL)
@@ -10,10 +11,11 @@ diff -pur zip30orig/fileio.c zip30/fileio.c
    /* Convert name to display or OEM name */
    oname = local_to_display_string(iname);
  #else
-diff -pur zip30orig/globals.c zip30/globals.c
---- zip30orig/globals.c	2008-05-25 21:26:38.000000000 +0400
-+++ zip30/globals.c	2010-11-28 17:30:37.000000000 +0300
-@@ -32,7 +32,7 @@ int pathput = 1;        /* 1=store path 
+diff --git a/globals.c b/globals.c
+index e73392a..8436353 100644
+--- a/globals.c
++++ b/globals.c
+@@ -32,7 +32,7 @@ int pathput = 1;        /* 1=store path with name */
  int scanimage = 1;      /* 1=scan through image files */
  #endif
  int method = BEST;      /* one of BEST, DEFLATE (only), or STORE (only) */
@@ -22,9 +24,10 @@ diff -pur zip30orig/globals.c zip30/globals.c
  int verbose = 0;        /* 1=report oddities in zip file structure */
  int fix = 0;            /* 1=fix the zip file, 2=FF, 3=ZipNote */
  int filesync = 0;       /* 1=file sync, delete entries not on file system */
-diff -pur zip30orig/unix/Makefile zip30/unix/Makefile
---- zip30orig/unix/Makefile	2008-05-07 10:33:56.000000000 +0400
-+++ zip30/unix/Makefile	2010-11-27 18:09:40.000000000 +0300
+diff --git a/unix/Makefile b/unix/Makefile
+index abd0c44..d0f91d7 100644
+--- a/unix/Makefile
++++ b/unix/Makefile
 @@ -61,6 +61,7 @@ CFLAGS_NOOPT = -I. -DUNIX $(LOCAL_ZIP)
  CFLAGS = -O2 $(CFLAGS_NOOPT)
  LFLAGS1 =
@@ -42,9 +45,10 @@ diff -pur zip30orig/unix/Makefile zip30/unix/Makefile
  zipnote$E: $(OBJN)
  	$(BIND) -o zipnote$E $(LFLAGS1) $(OBJN) $(LFLAGS2)
  zipcloak$E: $(OBJC) $(OCRCTB)
-diff -pur zip30orig/unix/osdep.h zip30/unix/osdep.h
---- zip30orig/unix/osdep.h	2005-07-12 10:41:08.000000000 +0400
-+++ zip30/unix/osdep.h	2010-11-27 18:03:39.000000000 +0300
+diff --git a/unix/osdep.h b/unix/osdep.h
+index 10f8ee9..fe7cae0 100644
+--- a/unix/osdep.h
++++ b/unix/osdep.h
 @@ -78,3 +78,6 @@
  #if !defined(NO_EF_UT_TIME) && !defined(USE_EF_UT_TIME)
  #  define USE_EF_UT_TIME
@@ -52,9 +56,10 @@ diff -pur zip30orig/unix/osdep.h zip30/unix/osdep.h
 +
 +/* Set Windows code as archive type */
 +#  define OS_CODE  0xb00
-diff -pur zip30orig/unix/unix.c zip30/unix/unix.c
---- zip30orig/unix/unix.c	2008-06-19 08:26:18.000000000 +0400
-+++ zip30/unix/unix.c	2010-11-27 18:03:39.000000000 +0300
+diff --git a/unix/unix.c b/unix/unix.c
+index f4d655d..6e1f195 100644
+--- a/unix/unix.c
++++ b/unix/unix.c
 @@ -14,6 +14,11 @@
  
  #include <time.h>
@@ -75,7 +80,7 @@ diff -pur zip30orig/unix/unix.c zip30/unix/unix.c
  
  
  #ifdef NO_DIR                    /* for AT&T 3B1 */
-@@ -262,6 +268,16 @@ int *pdosflag;          /* output: force
+@@ -262,6 +268,16 @@ int *pdosflag;          /* output: force MSDOS file attributes? */
    if (!pathput)
      t = last(t, PATH_END);
  
@@ -92,7 +97,7 @@ diff -pur zip30orig/unix/unix.c zip30/unix/unix.c
    /* Malloc space for internal name and copy it */
    if ((n = malloc(strlen(t) + 1)) == NULL)
      return NULL;
-@@ -269,6 +285,7 @@ int *pdosflag;          /* output: force
+@@ -269,6 +285,7 @@ int *pdosflag;          /* output: force MSDOS file attributes? */
  
    if (dosify)
      msname(n);
@@ -100,7 +105,7 @@ diff -pur zip30orig/unix/unix.c zip30/unix/unix.c
  
  #ifdef EBCDIC
    strtoasc(n, n);       /* here because msname() needs native coding */
-@@ -289,8 +306,19 @@ char *n;                /* internal file
+@@ -289,8 +306,19 @@ char *n;                /* internal file name */
  {
    char *x;              /* external file name */
  
@@ -120,9 +125,10 @@ diff -pur zip30orig/unix/unix.c zip30/unix/unix.c
  #ifdef EBCDIC
    strtoebc(x, n);
  #else
-diff -pur zip30orig/zip.c zip30/zip.c
---- zip30orig/zip.c	2008-07-05 20:34:06.000000000 +0400
-+++ zip30/zip.c	2010-11-29 09:29:57.000000000 +0300
+diff --git a/zip.c b/zip.c
+index 439821f..f63001b 100644
+--- a/zip.c
++++ b/zip.c
 @@ -2025,6 +2025,7 @@ struct option_struct far options[] = {
  #endif /* ?MACOS */
      {"J",  "junk-sfx",    o_NO_VALUE,       o_NOT_NEGATABLE, 'J',  "strip self extractor from archive"},
@@ -131,7 +137,7 @@ diff -pur zip30orig/zip.c zip30/zip.c
      {"l",  "to-crlf",     o_NO_VALUE,       o_NOT_NEGATABLE, 'l',  "convert text file line ends - LF->CRLF"},
      {"ll", "from-crlf",   o_NO_VALUE,       o_NOT_NEGATABLE, o_ll, "convert text file line ends - CRLF->LF"},
      {"lf", "logfile-path",o_REQUIRED_VALUE, o_NOT_NEGATABLE, o_lf, "log to log file at path (default overwrite)"},
-@@ -2289,7 +2290,7 @@ char **argv;            /* command line 
+@@ -2289,7 +2290,7 @@ char **argv;            /* command line tokens */
    dispose = 0;         /* 1=remove files after put in zip file */
    pathput = 1;         /* 1=store path with name */
    method = BEST;       /* one of BEST, DEFLATE (only), or STORE (only) */
@@ -140,7 +146,7 @@ diff -pur zip30orig/zip.c zip30/zip.c
    verbose = 0;         /* 1=report oddities in zip file structure */
    fix = 0;             /* 1=fix the zip file */
    adjust = 0;          /* 1=adjust offsets for sfx'd file (keep preamble) */
-@@ -2859,6 +2860,8 @@ char **argv;            /* command line 
+@@ -2859,6 +2860,8 @@ char **argv;            /* command line tokens */
            junk_sfx = 1;  break;
          case 'k':   /* Make entries using DOS names (k for Katz) */
            dosify = 1;  break;
