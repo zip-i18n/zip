@@ -2025,6 +2025,7 @@ struct option_struct far options[] = {
 #endif /* ?MACOS */
     {"J",  "junk-sfx",    o_NO_VALUE,       o_NOT_NEGATABLE, 'J',  "strip self extractor from archive"},
     {"k",  "DOS-names",   o_NO_VALUE,       o_NOT_NEGATABLE, 'k',  "force use of 8.3 DOS names"},
+    {"K",  "no DOS-names",o_NO_VALUE,       o_NOT_NEGATABLE, 'K',  "no use 8.3 DOS names"},
     {"l",  "to-crlf",     o_NO_VALUE,       o_NOT_NEGATABLE, 'l',  "convert text file line ends - LF->CRLF"},
     {"ll", "from-crlf",   o_NO_VALUE,       o_NOT_NEGATABLE, o_ll, "convert text file line ends - CRLF->LF"},
     {"lf", "logfile-path",o_REQUIRED_VALUE, o_NOT_NEGATABLE, o_lf, "log to log file at path (default overwrite)"},
@@ -2289,7 +2290,7 @@ char **argv;            /* command line tokens */
   dispose = 0;         /* 1=remove files after put in zip file */
   pathput = 1;         /* 1=store path with name */
   method = BEST;       /* one of BEST, DEFLATE (only), or STORE (only) */
-  dosify = 0;          /* 1=make new entries look like MSDOS */
+  dosify = 1;          /* 1=make new entries look like MSDOS */
   verbose = 0;         /* 1=report oddities in zip file structure */
   fix = 0;             /* 1=fix the zip file */
   adjust = 0;          /* 1=adjust offsets for sfx'd file (keep preamble) */
@@ -2859,6 +2860,8 @@ char **argv;            /* command line tokens */
           junk_sfx = 1;  break;
         case 'k':   /* Make entries using DOS names (k for Katz) */
           dosify = 1;  break;
+        case 'K':   /* Make entries using DOS names (K for Kompat) */
+          dosify = 0;  break;
         case 'l':   /* Translate end-of-line */
           translate_eol = 1; break;
         case o_ll:

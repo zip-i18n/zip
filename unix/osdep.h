@@ -78,3 +78,6 @@
 #if !defined(NO_EF_UT_TIME) && !defined(USE_EF_UT_TIME)
 #  define USE_EF_UT_TIME
 #endif
+
+/* Set Windows code as archive type */
+#  define OS_CODE  0xb00

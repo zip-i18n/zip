@@ -61,6 +61,7 @@ CFLAGS_NOOPT = -I. -DUNIX $(LOCAL_ZIP)
 CFLAGS = -O2 $(CFLAGS_NOOPT)
 LFLAGS1 =
 LFLAGS2 = -s
+LDADD = -lnatspec
 
 # object file lists
 OBJZ = zip.o zipfile.o zipup.o fileio.o util.o globals.o crypt.o ttyio.o \
@@ -125,7 +126,7 @@ zips: $(ZIPS)
 zipsman: $(ZIPS) $(ZIPMANUALs)
 
 zip$E: $(OBJZ) $(OBJI) $(OBJA) $(LIB_BZ)
-	$(BIND) -o zip$E $(LFLAGS1) $(OBJZ) $(OBJI) $(OBJA) $(LFLAGS2)
+	$(BIND) -o zip$E $(LFLAGS1) $(OBJZ) $(OBJI) $(OBJA) $(LFLAGS2) $(LDADD)
 zipnote$E: $(OBJN)
 	$(BIND) -o zipnote$E $(LFLAGS1) $(OBJN) $(LFLAGS2)
 zipcloak$E: $(OBJC) $(OCRCTB)

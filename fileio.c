@@ -929,7 +929,7 @@ int newname(name, isdir, casesensitive)
   }
   if ((zname = in2ex(iname)) == NULL)
     return ZE_MEM;
-#ifdef UNICODE_SUPPORT
+#if defined(UNICODE_SUPPORT) && !defined(UNIX)
   /* Convert name to display or OEM name */
   oname = local_to_display_string(iname);
 #else

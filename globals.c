@@ -32,7 +32,7 @@ int pathput = 1;        /* 1=store path with name */
 int scanimage = 1;      /* 1=scan through image files */
 #endif
 int method = BEST;      /* one of BEST, DEFLATE (only), or STORE (only) */
-int dosify = 0;         /* 1=make new entries look like MSDOS */
+int dosify = 1;         /* 1=make new entries look like MSDOS */
 int verbose = 0;        /* 1=report oddities in zip file structure */
 int fix = 0;            /* 1=fix the zip file, 2=FF, 3=ZipNote */
 int filesync = 0;       /* 1=file sync, delete entries not on file system */

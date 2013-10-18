@@ -14,6 +14,11 @@
 
 #include <time.h>
 
+#ifdef UNIX
+#  include <natspec.h>
+#  include <locale.h>
+#endif
+
 #if defined(MINIX) || defined(__mpexl)
 #  ifdef S_IWRITE
 #    undef S_IWRITE
@@ -60,6 +65,7 @@ local time_t label_utim = 0;
 
 /* Local functions */
 local char *readd OF((DIR *));
+local const char *oem_charset = NULL;
 
 
 #ifdef NO_DIR                    /* for AT&T 3B1 */
@@ -262,6 +268,16 @@ int *pdosflag;          /* output: force MSDOS file attributes? */
   if (!pathput)
     t = last(t, PATH_END);
 
+#ifdef UNIX
+  if (!oem_charset) {
+    setlocale(LC_CTYPE, "");
+    oem_charset = natspec_get_charset_by_locale(NATSPEC_DOSCS, "");
+  }
+  /* Convert to internal encoding */
+  if ((n = natspec_convert(t, oem_charset, 0, 0)) == NULL)
+    return NULL;
+  return n;
+#else
   /* Malloc space for internal name and copy it */
   if ((n = malloc(strlen(t) + 1)) == NULL)
     return NULL;
@@ -269,6 +285,7 @@ int *pdosflag;          /* output: force MSDOS file attributes? */
 
   if (dosify)
     msname(n);
+#endif
 
 #ifdef EBCDIC
   strtoasc(n, n);       /* here because msname() needs native coding */
@@ -289,8 +306,19 @@ char *n;                /* internal file name */
 {
   char *x;              /* external file name */
 
+#ifdef UNIX
+  if (!oem_charset) {
+    oem_charset = natspec_get_charset_by_locale(NATSPEC_DOSCS, "");
+    setlocale(LC_CTYPE, "");
+  }
+  /* Convert to internal encoding */
+  if ((x = natspec_convert(n, 0, oem_charset, 0)) == NULL)
+    return NULL;
+  return x;
+#else
   if ((x = malloc(strlen(n) + 1 + PAD)) == NULL)
     return NULL;
+#endif
 #ifdef EBCDIC
   strtoebc(x, n);
 #else
