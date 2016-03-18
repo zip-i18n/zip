@@ -7,3 +7,4 @@
 07-fclose-in-file-not-fclose-x
 08-hardening-build-fix-1
 09-hardening-build-fix-2
+10-remove-build-date
