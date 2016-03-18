@@ -1,11 +1,43 @@
-zip (3.0-7i18n2) saucy; urgency=low
+zip (3.0-11+i18n2) xenial; urgency=low
 
   * Apply natspec+asdos patch from http://www.opennet.ru/tips/info/2494.shtml
     to support automatically encoding file names from current locale to a
     Windows encoding and create archives with DOS-compatible file names by
     default. This is to complement changes to unzip utility.
 
- -- Dmitry Frolov (Launchpad.net) <dmitry.frolov@gmail.com>  Mon, 18 Feb 2013 15:16:26 +0700
+ -- Dmitry Frolov (Launchpad.net) <dmitry.frolov@gmail.com>  Fri, 18 Mar 2016 10:46:55 +0600
+
+zip (3.0-11) unstable; urgency=medium
+
+  * Ship a debian/copyright file in source package instead of generating
+    it a build time. Closes: #795569.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 16 Aug 2015 23:38:04 +0200
+
+zip (3.0-10) unstable; urgency=medium
+
+  * Remove build date embedded in binary to make the build reproducible.
+    One should really look at jenkins.debian.net. Closes: #779042.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 17 May 2015 15:35:52 +0200
+
+zip (3.0-9) unstable; urgency=medium
+
+  * Switch to dh. Package should now build reproducibly. Closes: #779042.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 17 May 2015 12:41:32 +0200
+
+zip (3.0-8) unstable; urgency=low
+
+  * Dropped copyright sentence saying zcrypt was in the public domain.
+    The whole zip package is now under Info-ZIP license.
+  * Added recommended targets build-arch and build-indep.
+  * Dropped obsolete Conflicts and Replaces on zip-crypt, for which
+    the last version was a dummy transitional package.
+  * The copyright file is generated from copyright.in at build time.
+    Added lintian override for no-debian-copyright.
+
+ -- Santiago Vila <sanvila@debian.org>  Mon, 14 Oct 2013 18:51:24 +0200
 
 zip (3.0-7) unstable; urgency=low
 
